@@ -117,3 +117,178 @@ function afficherPairs() {
 }
 
 
+const titre = document.getElementById("titre");
+
+const section = document.getElementById("sectionChapitre");
+
+const paragraphes = section.getElementsByTagName("p");
+
+const chapitres = document.getElementsByClassName("chapitre");
+
+const chapitreImportant =
+    document.querySelector(".chapitre.important");
+
+const tousLesChapitres =
+    document.querySelectorAll("p.chapitre");
+
+console.log("Nombre de paragraphes sélectionnés :",
+    tousLesChapitres.length);
+
+document.getElementById("btnPresentation")
+    .addEventListener("click", function() {
+
+        titre.textContent = "JavaScript : une page interactive";
+
+        for (let i = 0; i < chapitres.length; i++) {
+
+            chapitres[i].style.color = "blue";
+        }
+
+        chapitreImportant.style.fontWeight = "bold";
+
+        this.textContent = "Présentation modifiée";
+
+    });
+
+
+function mettreEnEvidence(champ) {
+
+    champ.style.backgroundColor = "lightyellow";
+}
+
+
+function retablirStyle(champ) {
+
+    champ.style.backgroundColor = "";
+}
+
+
+function afficherSaisie(champ) {
+
+    document.getElementById("apercu").textContent =
+        champ.value;
+}
+
+
+function afficherRouge(element) {
+
+    element.style.color = "red";
+}
+
+
+function retablirCouleur(element) {
+
+    element.style.color = "";
+}
+
+
+document.getElementById("btnSelection")
+    .addEventListener("click", function() {
+
+        const champ = document.getElementById("prenom");
+
+        champ.focus();
+
+        champ.select();
+
+    });
+
+
+
+const formulaire = document.forms["inscription"];
+
+const champNom = formulaire.elements["nom"];
+
+formulaire.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const nom = champNom.value.trim();
+
+    const profession = formulaire.elements["profession"].value;
+
+    const sexeSelectionne =
+        formulaire.querySelector('input[name="sexe"]:checked');
+
+    const langues =
+        formulaire.querySelectorAll('input[name="langue"]');
+
+    if (nom.length < 3) {
+
+        document.getElementById("message").textContent =
+            "Erreur : le nom doit contenir au moins 3 caractères.";
+
+        champNom.focus();
+
+        return;
+    }
+
+    if (profession === "") {
+
+        document.getElementById("message").textContent =
+            "Erreur : veuillez choisir une profession.";
+
+        return;
+    }
+
+    if (sexeSelectionne === null) {
+
+        document.getElementById("message").textContent =
+            "Erreur : veuillez sélectionner un sexe.";
+
+        return;
+    }
+
+    const languesChoisies = [];
+
+    for (let i = 0; i < langues.length; i++) {
+
+        if (langues[i].checked) {
+
+            languesChoisies.push(langues[i].value);
+        }
+    }
+
+
+    if (languesChoisies.length === 0) {
+
+        document.getElementById("message").textContent =
+            "Erreur : veuillez choisir au moins une langue.";
+
+        return;
+    }
+
+    const inscription = {
+
+        nom: nom,
+
+        profession: profession,
+
+        sexe: sexeSelectionne.value,
+
+        langues: languesChoisies.join(", "),
+
+        presenter: function() {
+
+            return "Nom : " + this.nom +
+                "\nProfession : " + this.profession +
+                "\nSexe : " + this.sexe +
+                "\nLangues : " + this.langues;
+        }
+    };
+
+    document.getElementById("message").textContent =
+        "Inscription réussie !";
+
+    document.getElementById("recapitulatif").textContent =
+        inscription.presenter();
+
+});
+
+formulaire.addEventListener("reset", function() {
+
+    document.getElementById("message").textContent = "";
+
+    document.getElementById("recapitulatif").textContent = "";
+
+});

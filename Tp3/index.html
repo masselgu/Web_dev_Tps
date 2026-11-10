@@ -27,9 +27,95 @@
 
     <section id="sectionChapitre">
 
+        <h2 id="titre">Découvrir JavaScript</h2>
+
+        <p class="chapitre">Les variables</p>
+
+        <p class="chapitre important">Les fonctions</p>
+
+        <p class="chapitre">Les événements</p>
+
+        <button id="btnPresentation">
+            Modifier la présentation
+        </button>
 
     </section>
 
-<script src="script.js"></script>
+    <hr>
+
+    <h2>Zone interactive</h2>
+
+    <label>Prénom :</label>
+    <input
+        type="text"
+        id="prenom"
+        onfocus="mettreEnEvidence(this)"
+        onblur="retablirStyle(this)"
+        oninput="afficherSaisie(this)"
+    >
+
+    <button id="btnSelection">
+        Sélectionner le texte
+    </button>
+
+    <p>Votre prénom : <span id="apercu"></span></p>
+
+    <p
+        id="texteSurvole"
+        onmouseover="afficherRouge(this)"
+        onmouseout="retablirCouleur(this)"
+    >
+        Survolez ce texte.
+    </p>
+
+    <hr>
+
+    <h2>Formulaire d'inscription</h2>
+
+    <form id="formInscription" name="inscription">
+
+        <p>
+            <label>Nom :</label>
+            <input type="text" name="nom">
+        </p>
+
+        <p>
+            <label>Profession :</label>
+            <select name="profession">
+                <option value="">Choisir une profession</option>
+                <option value="Technicien">Technicien</option>
+                <option value="Ingénieur">Ingénieur</option>
+                <option value="Médecin">Médecin</option>
+            </select>
+        </p>
+
+        <p>
+            Sexe :
+            <input type="radio" name="sexe" value="H"> H
+            <input type="radio" name="sexe" value="F"> F
+        </p>
+
+        <p>
+            Langues :
+            <input type="checkbox" name="langue" value="Arabe">
+            Arabe
+
+            <input type="checkbox" name="langue" value="Français">
+            Français
+        </p>
+
+        <button type="submit">Inscrire</button>
+
+        <button type="reset">Effacer</button>
+
+    </form>
+
+    <p id="message"></p>
+
+    <h3>Récapitulatif</h3>
+    <p id="recapitulatif"></p>
+
+    <script src="script.js"></script>
+
 </body>
-    
+</html>
